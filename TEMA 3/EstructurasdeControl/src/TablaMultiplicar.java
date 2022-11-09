@@ -1,17 +1,18 @@
 import java.util.Scanner;
 
 public class TablaMultiplicar {
-	int numeroTabla = 5;
+	int numeroTabla;
+
 	public void imprimirTablaMultiplicar() {
 		System.out.println("introduzca un numero:");
-		Scanner sc = new Scanner (System.in);
+		Scanner sc = new Scanner(System.in);
 		numeroTabla = sc.nextInt();
 		sc.nextInt();
 		sc.nextLine();
 		System.out.println(" Tabla del " + numeroTabla);
-		for (int i = 1; i <= 10; i++);
-		System.out.println();
+		for (int i = 1; i <= 10; i++) {
+			System.out.println(numeroTabla + " * " + i + " = " + (numeroTabla * i));
+		}
 	}
 
 }
-	

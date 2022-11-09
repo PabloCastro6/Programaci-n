@@ -1,6 +1,8 @@
+import java.util.Scanner;
 
 public class Menu {
 	public void imprimirMenu() {
+		int menuElegido;
 		do {
 			System.out.println("******************Menu*************");
 			System.out.println("1. Imprimir los numeros naturales");
