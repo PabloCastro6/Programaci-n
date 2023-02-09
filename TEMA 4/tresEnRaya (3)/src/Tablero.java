@@ -1,4 +1,4 @@
-package tresEnRaya;
+package src;
 
 import java.util.Scanner;
 
@@ -44,7 +44,7 @@ public class Tablero {
 	 * Cambia jugador.
 	 */
 	public void cambiaJugador() {
-		// System.out.println("Cambiando de jugador, jugador actual: " + this.jugadorActual);
+		
 		if (this.jugadorActual == 'X') {
 			this.jugadorActual = 'O';
 		} else {
@@ -103,32 +103,6 @@ public class Tablero {
 		} while (!casillaVacia);
 	}
 
-	// while (!casillaVacia) {
-	// while (fila_jugador < 0 || fila_jugador > filas || columna_jugador < 0 ||
-	// columna_jugador > columnas) {
-	// System.out.println("Jugador actual: "+this.jugadorActual);
-	// System.out.println("Introduzca el numero de fila [ENTER]: ");
-	// fila_jugador = entrada.nextInt() - 1;
-	// System.out.println("Introduzca el numero de columna: ");
-	// columna_jugador = entrada.nextInt() - 1;
-
-	// if (fila_jugador < 0 || fila_jugador > filas || columna_jugador < 0 ||
-	// columna_jugador > columnas) {
-	// System.out.println("La fila o la columna esta fuera de rango");
-	// }
-	// }
-	// if (matriz[fila_jugador][columna_jugador] == '-') {
-	// matriz[fila_jugador][columna_jugador] = jugadorActual;
-	// casillaVacia = true;
-
-	// } else {
-
-	// System.out.println("La casilla para esta fila y columna est� ocupada");
-	// }
-	// break;
-	// }
-
-	// }
 
 	/**
 	 * Hay ganador.
@@ -172,36 +146,6 @@ public class Tablero {
 		
 		
 		
-		
-	/* boolean filaIguales = true;
-
-		int contadorFila = 0;
-		for (int i = 0; i < filas; i++) {
-
-			for (int j = 0; j < columnas; j++) {
-
-				if (matriz[i][j] == this.jugadorActual) {
-					contadorFila++;
-
-				}
-			}
-			// System.out.println("Cuenta de la fila "+i+": "+contadorFila);
-			if (contadorFila == 3) {
-				// System.out.println("Hay ganador en fila");
-				return true;
-			}
-			if (i + 1 == filas) {
-				filaIguales = false;
-			}
-
-			contadorFila = 0;
-		}
-		return filaIguales;
-	}
-*/
-		
-		
-		
 	/**
 	 * Hay ganador en columna.
 	 *
@@ -221,21 +165,6 @@ public class Tablero {
 	 return !coincide;
 	}
 
-	// if (matriz[0][0] == this.jugadorActual && matriz[1][0] == this.jugadorActual
-	// && matriz[2][0] == this.jugadorActual) {
-	// return true;
-	// }
-	// if (matriz[0][1] == this.jugadorActual && matriz[1][1] == this.jugadorActual
-	// && matriz[2][1] == this.jugadorActual) {
-	// return true;
-	// }
-	// if (matriz[0][2] == this.jugadorActual && matriz[1][2] == this.jugadorActual
-	// && matriz[2][2] == this.jugadorActual) {
-	// return true;
-	// }
-
-	// return false;
-	// }
 
 	/**
 	 * Hay ganador en diagonal.
