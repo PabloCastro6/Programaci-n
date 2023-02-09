@@ -1,0 +1,41 @@
+public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		Random rand = new Random();
+		System.out.println("Dígame un número entero:");
+		int num = sc.nextInt();
+		int array[][] = new int[num][num]; 
+		String array2[][] = new String[num][num];
+		for(int i = 0; i < num; i++) {
+			for(int j = 0; j < num; j++) {
+				array[i][j] = rand.nextInt(num + 1);
+				array2[i][j] = Integer.toString(array[i][j]);
+				System.out.print("| " + array[i][j] + " |");
+			}
+			System.out.println();
+		}
+		int points = 0, count = 0;
+		do {
+			System.out.println("Díspara al pianista:");
+			System.out.println("Dime fila:");
+			int fila = sc.nextInt();
+			System.out.println("Dime columna:");
+			int columna = sc.nextInt();
+			if (array2[fila][columna] != "X"){
+				points += array[fila][columna];
+				System.out.println("Tienes " + points + " puntos acumulados.");
+				array2[fila][columna] = "X";
+				for(int i = 0; i < num; i++) {
+					for(int j = 0; j < num; j++) {
+						System.out.print("| " + array2[i][j] + " |");
+					}
+					System.out.println();
+				}
+				count += 1;
+				}
+			else {
+				System.out.println("Antención en esa posición ya habías disparado");
+			}
+		}while(count < (num*num));
+		System.out.println("Fin de juego... has hecho: " + points + " puntos.");
+	}
+}

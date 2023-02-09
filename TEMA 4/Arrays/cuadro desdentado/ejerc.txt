@@ -1,0 +1,31 @@
+public class Principal {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Por favor, introduzca un número entero:");
+		int num = sc.nextInt();
+		String array[][] = new String[num][num];	
+		String n = Integer.toString(num);
+		Random rand = new Random();
+		String choice[] = {"| " +  n + " |", "|   |"};
+		System.out.println("Matriz desdentada de números: ");
+		for(int i = 0; i < num; i++) {
+			for(int j = 0; j < num; j++) {
+				array[i][j] = choice[rand.nextInt(2)];
+				System.out.print(array[i][j] + " ");
+			}
+			System.out.println();
+		}
+		System.out.println();
+		System.out.println("Matriz desdentada de índices:");
+		for(int i = 0; i < num; i++) {
+			for(int j = 0; j < num; j++) {
+				int r = rand.nextInt(2);
+				if(r == 1) {
+					System.out.print("| " + i + j + " |");
+				}
+				else System.out.print("|    |");
+			}
+			System.out.println();
+		}
+	}
+}
