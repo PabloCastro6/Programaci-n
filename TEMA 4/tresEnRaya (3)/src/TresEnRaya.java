@@ -1,5 +1,5 @@
 
-package tresEnRaya;
+package src;
 
 // TODO: Auto-generated Javadoc
 /**
