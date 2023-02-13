@@ -15,6 +15,7 @@ public class Tablero {
 				tablero[i][j] = 0;
 			}
 		}
+//		colocaBarcos();
 	}
 		/*int filaBarco = 1,columnaBarco= 1;   //Obtener aleatoriamente
 		int posicion = 1;   //1 Vertical, 0 Horizontal  Obtener aleatoriamente
@@ -41,7 +42,25 @@ public class Tablero {
 				}
 				System.out.println(" ");
 			}
+			
+			
 	
 	}
+		public void colocaBarcos() {
+			//TODO: Crear tres bucles para colocar barcos
+			colocaBarco(1);
+			
+			colocaBarco(2);
+			
+			colocaBarco(3);
+		}
+		
+		public void colocaBarco(int tamanoBarco) {
+			
+//			TODO: Calcular una fila y una columna de manera random
+			//TODO: Calcular un número que nos indicará la dirección de crecimiento
+			
+			
+		}
 	}
 
