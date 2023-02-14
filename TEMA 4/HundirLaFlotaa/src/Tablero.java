@@ -5,14 +5,15 @@ import java.util.Scanner;
 public class Tablero {
 
 	Scanner sc = new Scanner(System.in);
-	private final int filas = 16,columnas = 16;
-	private int tablero[][] = new int[filas][columnas];
+	 int filas = 16;
+     int columnas = 16;
+	char tablero[][] = new char [filas][columnas];
 	
 	public Tablero() {
 		System.out.println("Dentro");
 		for (int i = 0; i < filas; i++) {
 			for (int j = 0; j < columnas; j++) {
-				tablero[i][j] = 0;
+				tablero[i][j] = '~' ;
 			}
 		}
 //		colocaBarcos();
@@ -22,7 +23,7 @@ public class Tablero {
 		int barcoTresPosiciones [] = {1,1,1};
 		for(int i = 0 ; i<barcoTresPosiciones.length;i++) {
 			if(posicion==0) {
-				tablero[filaBarco][columnaBarco] = barcoTresPosiciones[i];
+				tablero[filaBarco][columnaBarco] = barcoTresPosiciones[i];cha
 				columnaBarco++;		
 			}else {
 				tablero[filaBarco][columnaBarco] = barcoTresPosiciones[i];
@@ -46,6 +47,7 @@ public class Tablero {
 			
 	
 	}
+	
 		public void colocaBarcos() {
 			//TODO: Crear tres bucles para colocar barcos
 			colocaBarco(1);
@@ -61,6 +63,9 @@ public class Tablero {
 			//TODO: Calcular un número que nos indicará la dirección de crecimiento
 			
 			
+			
 		}
+		
+		
 	}
 
