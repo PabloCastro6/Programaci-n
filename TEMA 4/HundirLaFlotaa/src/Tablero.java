@@ -48,14 +48,15 @@ public class Tablero {
 	}
 		public void colocaBarcos() {
 			//TODO: Crear tres bucles para colocar barcos
-			colocaBarco(1);
+			colocaBarco(1,3);
 			
-			colocaBarco(2);
 			
-			colocaBarco(3);
+			colocaBarco(2,2);
+			
+			colocaBarco(3,1);
 		}
 		
-		public void colocaBarco(int tamanoBarco) {
+		public void colocaBarco(int tipoRepresentacion, int LingitudBarco) {
 			
 //			TODO: Calcular una fila y una columna de manera random
 			//TODO: Calcular un número que nos indicará la dirección de crecimiento

@@ -98,6 +98,7 @@ public class Tablero {
 				} else {
 					matriz[fila - 1][columna - 1] = jugadorActual;
 					casillaVacia = true;
+					
 				}
 			}
 		} while (!casillaVacia);
@@ -138,11 +139,12 @@ public class Tablero {
 		 if (matriz [i][0] == matriz [i][1] && matriz[i][0] == matriz[i][2]) {
 		 return coincide;
 		 }
-
+		
 		 }
-	 }
+		 }
 	 return !coincide;
 	}
+		 
 		
 		
 		
