@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class Tablero {
 
 	Scanner sc = new Scanner(System.in);
+<<<<<<< HEAD
 	private final int filasTablero = 16,columnasTablero = 16;
 	private char tablero[][] = new char[filasTablero][columnasTablero];
 	//private char letras [] = {
@@ -16,6 +17,11 @@ public class Tablero {
 		private int numeros [] = {
 					0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
 		
+=======
+	 int filas = 16;
+     int columnas = 16;
+	char tablero[][] = new char [filas][columnas];
+>>>>>>> 5df044e6de746c569083bac6d8da0725050e53d0
 	
 	public Tablero() {
 		//~ => AGUA
@@ -23,9 +29,15 @@ public class Tablero {
 	   //1/2/3 => Parte del barco
 		
 		System.out.println("Dentro");
+<<<<<<< HEAD
 		for (int i = 0; i < filasTablero; i++) {
 			for (int j = 0; j < columnasTablero; j++) {
 				tablero[i][j] = '~';
+=======
+		for (int i = 0; i < filas; i++) {
+			for (int j = 0; j < columnas; j++) {
+				tablero[i][j] = '~' ;
+>>>>>>> 5df044e6de746c569083bac6d8da0725050e53d0
 			}
 		}
 	colocaBarcos();
@@ -35,7 +47,7 @@ public class Tablero {
 		int barcoTresPosiciones [] = {1,1,1};
 		for(int i = 0 ; i<barcoTresPosiciones.length;i++) {
 			if(posicion==0) {
-				tablero[filaBarco][columnaBarco] = barcoTresPosiciones[i];
+				tablero[filaBarco][columnaBarco] = barcoTresPosiciones[i];cha
 				columnaBarco++;		
 			}else {
 				tablero[filaBarco][columnaBarco] = barcoTresPosiciones[i];
@@ -109,6 +121,11 @@ public class Tablero {
 		}
 	
 	
+<<<<<<< HEAD
+=======
+	}
+	
+>>>>>>> 5df044e6de746c569083bac6d8da0725050e53d0
 		public void colocaBarcos() {
 			//TODO: Crear tres bucles para colocar barcos
 			for(int i=0;i<=2;i++) {
@@ -129,6 +146,7 @@ public class Tablero {
 //			TODO: Calcular una fila y una columna de manera random
 			//TODO: Calcular un número que nos indicará la dirección de crecimiento
 			
+<<<<<<< HEAD
 			public void colocaBarco(char tipoRepresentacion,int longitudBarco) {
 				int filaBarco,columnaBarco; 
 				int orientacion = (int)(Math.random()*2); //1 Vertical, 0 Horizontal 
@@ -186,4 +204,12 @@ public class Tablero {
 			}
 		}
 			
+=======
+			
+			
+		}
+		
+		
+	}
+>>>>>>> 5df044e6de746c569083bac6d8da0725050e53d0
 
