@@ -5,9 +5,9 @@ import java.util.Scanner;
 public class Tablero {
 
 	Scanner sc = new Scanner(System.in);
-<<<<<<< HEAD
-	private final int filasTablero = 16,columnasTablero = 16;
-	private char tablero[][] = new char[filasTablero][columnasTablero];
+
+	 final int filasTablero = 16,columnasTablero = 16;
+	 char Tablero[][] = new char[Constantes.TAMAÑOTABLERO][Constantes.TAMAÑOTABLERO];
 	//private char letras [] = {
 			//	'A','B','C','D','E','F','G','H','I','J','K','L','M','N','P','Q'};
 		private String letras [] = {
@@ -17,27 +17,23 @@ public class Tablero {
 		private int numeros [] = {
 					0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
 		
-=======
+
 	 int filas = 16;
      int columnas = 16;
 	char tablero[][] = new char [filas][columnas];
->>>>>>> 5df044e6de746c569083bac6d8da0725050e53d0
+
 	
 	public Tablero() {
 		//~ => AGUA
 		//x => Barco tocado
-	   //1/2/3 => Parte del barco
+	   //1/2/3 => Partes del barco
 		
 		System.out.println("Dentro");
-<<<<<<< HEAD
+
 		for (int i = 0; i < filasTablero; i++) {
 			for (int j = 0; j < columnasTablero; j++) {
 				tablero[i][j] = '~';
-=======
-		for (int i = 0; i < filas; i++) {
-			for (int j = 0; j < columnas; j++) {
-				tablero[i][j] = '~' ;
->>>>>>> 5df044e6de746c569083bac6d8da0725050e53d0
+
 			}
 		}
 	colocaBarcos();
@@ -121,21 +117,17 @@ public class Tablero {
 		}
 	
 	
-<<<<<<< HEAD
-=======
-	}
-	
->>>>>>> 5df044e6de746c569083bac6d8da0725050e53d0
+
 		public void colocaBarcos() {
 			//TODO: Crear tres bucles para colocar barcos
 			for(int i=0;i<=2;i++) {
-				colocaBarco('1',3); //Barcos en forma de unos
+				colocaBarco('1',3); //Barcos en forma de 1
 			}
 			for(int i=0;i<=1;i++) {
-				colocaBarco('2',2); //Barcos en forma de doses
+				colocaBarco('2',2); //Barcos en forma de 2
 			}		
 			for(int i=0;i<=2;i++) {
-				colocaBarco('3',1); //Barcos en forma de treses
+				colocaBarco('3',1); //Barcos en forma de 3
 			}		
 				
 		}
@@ -146,7 +138,7 @@ public class Tablero {
 //			TODO: Calcular una fila y una columna de manera random
 			//TODO: Calcular un número que nos indicará la dirección de crecimiento
 			
-<<<<<<< HEAD
+
 			public void colocaBarco(char tipoRepresentacion,int longitudBarco) {
 				int filaBarco,columnaBarco; 
 				int orientacion = (int)(Math.random()*2); //1 Vertical, 0 Horizontal 
@@ -202,14 +194,12 @@ public class Tablero {
 				}
 				return false;
 			}
+		
+
+			
+			
 		}
 			
-=======
-			
-			
-		}
-		
-		
-	}
->>>>>>> 5df044e6de746c569083bac6d8da0725050e53d0
+	
+
 
