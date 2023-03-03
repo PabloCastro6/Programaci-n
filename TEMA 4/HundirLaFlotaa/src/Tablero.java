@@ -33,7 +33,7 @@ public class Tablero {
 		for (int i = 0; i < filasTablero; i++) {
 			for (int j = 0; j < columnasTablero; j++) {
 				tablero[i][j] = '~';
-
+				
 			}
 		}
 	colocaBarcos();
