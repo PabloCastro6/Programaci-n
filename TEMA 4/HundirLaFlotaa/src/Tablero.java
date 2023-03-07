@@ -70,7 +70,7 @@ public class Tablero {
 					System.out.print("| " + numeros[i] + " | ");
 				} else {
 					if(i==0) {
-						System.out.print("   | " + numeros[i] + " ");
+						System.out.print(" | " + numeros[i] + " ");
 					}else {
 						if(i>=9) {
 							System.out.print("| " + numeros[i] + " ");
@@ -122,7 +122,7 @@ public class Tablero {
 			System.out.println("Dentro de imprime tablero");
 			for(int i=0;i<numeros.length;i++) {
 				if(i+1 == numeros.length) {
-					System.out.println(" | " + numeros[i] + " | ");
+					System.out.print(" | " + numeros[i] + " | ");
 				}else {
 					if (i==0) {
 						System.out.print("  | " +numeros[i] + " ");
@@ -130,7 +130,7 @@ public class Tablero {
 						if(i>=9) {
 							System.out.print("  | " + numeros[i] + " ");
 						}else {
-							System.out.println("| " + numeros[i] + " ");
+							System.out.print("| " + numeros[i] + " ");
 						}
 					}
 				}
