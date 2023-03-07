@@ -3,81 +3,85 @@ import java.util.Scanner;
 
 public class Juego {
 	
-	//	Tablero jugar = new Tablero();
-		//do {
-		//	jugar.imprimirTablero(debug);
-		//	jugar.actualizarTablero();
-		//} while (!jugar.todosHundidos()&&jugar.quedaMunicion());
-	//	if(jugar.todosHundidos()) {
-	//		System.out.println("Hundiste todos los barcos");
-	//	}
-//	}
-//}
 	
 
-private Tablero t;
-private Scanner entrada = new Scanner (System.in);
-private int filaUsuario,colmunaUsuario;
-private int partesBarcosRestantes = Constantes.PARTES_BARCOS_RESTANTES;
-private int oportunidades = Constantes.OPORTUNIDADES_DISPARO;
-private boolean soyGanador = false;
-public Juego(Tablero t) {
-	this.t=t;
-}
-
-
-public Tablero getTablero() {
-	return t;
-}
-public void solicitarCasilla() {
-	do {
-		System.out.println("Inserta una fila: ");
-		filaUsuario = entrada.nextInt();
-		System.out.println("Inserta una columna: ");
-		colmunaUsuario = entrada.nextInt();
-		//System.out.println("Posicion elegida: [F:"+filaUsuario+" - C:"+colmunaUsuario+"]");
-		if(filaUsuario>=t.getFilas() || colmunaUsuario>=t.getColumnas()) {
-			System.out.println("Coordenadas invalidas");
-		}	
-	}while(filaUsuario>=t.getFilas() || colmunaUsuario>=t.getColumnas());
-	consultarCasilla(filaUsuario,colmunaUsuario);
-	
-}
-
-public void consultarCasilla(int f,int c) {
-	if(t.getMatrizTablero()[f][c]!='~') {
-		if(t.getMatrizTablero()[f][c]=='X') {
-			System.out.println("En esta casilla ya hay una parte hundida");
-			oportunidades--;
+	private Tablero t;
+	private Scanner entrada = new Scanner (System.in);
+	private int filaUsuario,colmunaUsuario;
+	private int partesBarcosRestantes = Constantes.PARTES_BARCOS_RESTANTES;
+	private int oportunidades = Constantes.OPORTUNIDADES_DISPARO;
+	private boolean soyGanador = false;
+	public Juego(boolean debug) {
+		t = new Tablero(debug);
+		t.imprimeTablero();
+			
+		do {
+			solicitarCasilla();
+			t.imprimeTablero();
+		}while(!juegoTerminado());
+		
+		if(esGanador()) {
+			System.out.println("Has ganado!");
 		}else {
-			System.out.println("TOCADO!");
-			partesBarcosRestantes--;
-			t.setMatrizTablero('X', f, c);
+			System.out.println("Has perdido!");
+		}
+		System.out.println("Juego terminado");
+
+	}
+	
+
+	public Tablero getTablero() {
+		return t;
+	}
+	public void solicitarCasilla() {
+		do {
+			System.out.println("Inserta una fila: ");
+			filaUsuario = entrada.nextInt();
+			System.out.println("Inserta una columna: ");
+			colmunaUsuario = entrada.nextInt();
+			//System.out.println("Posicion elegida: [F:"+filaUsuario+" - C:"+colmunaUsuario+"]");
+			if(filaUsuario>=t.getFilas() || colmunaUsuario>=t.getColumnas()) {
+				System.out.println("Coordenadas invalidas");
+			}	
+		}while(filaUsuario>=t.getFilas() || colmunaUsuario>=t.getColumnas());
+		consultarCasilla(filaUsuario,colmunaUsuario);
+		
+	}
+	
+	public void consultarCasilla(int f,int c) {
+		if(t.getMatrizTablero()[f][c]!='~') {
+			if(t.getMatrizTablero()[f][c]=='X') {
+				System.out.println("En esta casilla ya hay una parte hundida");
+				oportunidades--;
+			}else {
+				System.out.println("�Tocado!");
+				partesBarcosRestantes--;
+				t.setMatrizTableros('X', f, c);
+			}
+		}else {
+			oportunidades--;
+			System.out.println("�Agua!");
+			t.setMatrizTableros('~', f, c);
 		}
 		
-	}else {
-		oportunidades--;
-		System.out.println("AGUA!");
-		t.setMatrizTablero('~', f, c);
+		//System.out.println("Partes Barco Rest: "+partesBarcosRestantes);
+		System.out.println("Oportunidades: "+oportunidades);
 	}
 	
-	System.out.println("Oportunidades: "+oportunidades);
-}
-
-public boolean juegoTerminado() {
-	if(partesBarcosRestantes==0 || oportunidades==0) {
-		if(partesBarcosRestantes==0 && oportunidades>0) {
-			soyGanador = true;
+	public boolean juegoTerminado() {
+		if(partesBarcosRestantes==0 || oportunidades==0) {
+			if(partesBarcosRestantes==0 && oportunidades>0) {
+				soyGanador = true;
+			}
+			return true;
+		}else {
+			return false;
 		}
-		return true;
-	}else {
-		return false;
 	}
-}
-
-public boolean esGanador() {
-	return soyGanador;
-}
-
+	
+	public boolean esGanador() {
+		return soyGanador;
+	}
+	
 
 }
