@@ -18,8 +18,8 @@ public class Juego {
 private Tablero t;
 private Scanner entrada = new Scanner (System.in);
 private int filaUsuario,colmunaUsuario;
-private int partesBarcosRestantes = 16;
-private int oportunidades = 10;
+private int partesBarcosRestantes = Constantes.PARTES_BARCOS_RESTANTES;
+private int oportunidades = Constantes.OPORTUNIDADES_DISPARO;
 private boolean soyGanador = false;
 public Juego(Tablero t) {
 	this.t=t;
@@ -35,7 +35,7 @@ public void solicitarCasilla() {
 		filaUsuario = entrada.nextInt();
 		System.out.println("Inserta una columna: ");
 		colmunaUsuario = entrada.nextInt();
-		System.out.println("Posicion elegida: [F:"+filaUsuario+" - C:"+colmunaUsuario+"]");
+		//System.out.println("Posicion elegida: [F:"+filaUsuario+" - C:"+colmunaUsuario+"]");
 		if(filaUsuario>=t.getFilas() || colmunaUsuario>=t.getColumnas()) {
 			System.out.println("Coordenadas invalidas");
 		}	
@@ -50,13 +50,17 @@ public void consultarCasilla(int f,int c) {
 			System.out.println("En esta casilla ya hay una parte hundida");
 			oportunidades--;
 		}else {
+			System.out.println("TOCADO!");
 			partesBarcosRestantes--;
+			t.setMatrizTablero('X', f, c);
 		}
+		
 	}else {
 		oportunidades--;
+		System.out.println("AGUA!");
+		t.setMatrizTablero('~', f, c);
 	}
-	t.setMatrizTablero('X', f, c);
-	System.out.println("Partes Barco Rest: "+partesBarcosRestantes);
+	
 	System.out.println("Oportunidades: "+oportunidades);
 }
 

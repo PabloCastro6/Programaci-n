@@ -1,16 +1,18 @@
 
-
 import java.util.Scanner;
+
+
 
 public class Tablero {
 
 	Scanner sc = new Scanner(System.in);
-
-	 final int filasTablero = 16,columnasTablero = 16;
-	 char Tablero[][] = new char[Constantes.TAMAÑOTABLERO][Constantes.TAMAÑOTABLERO];
+	 final int filasTablero = Constantes.NUMERO_FILAS_COLUMNAS,columnasTablero = Constantes.NUMERO_FILAS_COLUMNAS;
+      char Tablero[][] = new char[filasTablero][columnasTablero];
+	 char tableroUsuario[][]= new char [filasTablero][columnasTablero];
+	 private boolean debug;
 	//private char letras [] = {
 			//	'A','B','C','D','E','F','G','H','I','J','K','L','M','N','P','Q'};
-		private String letras [] = {
+		private String numerosVerticales [] = {
 				"0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"};
 		//private int numeros [] = {
 			//	1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
@@ -24,6 +26,7 @@ public class Tablero {
 
 	
 	public Tablero() {
+		this.debug = debug;
 		//~ => AGUA
 		//x => Barco tocado
 	   //1/2/3 => Partes del barco
@@ -33,24 +36,13 @@ public class Tablero {
 		for (int i = 0; i < filasTablero; i++) {
 			for (int j = 0; j < columnasTablero; j++) {
 				tablero[i][j] = '~';
+				tableroUsuario[i][j]=' ';
 				
 			}
 		}
 	colocaBarcos();
 	}
-		/*int filaBarco = 1,columnaBarco= 1;   //Obtener aleatoriamente
-		int posicion = 1;   //1 Vertical, 0 Horizontal  Obtener aleatoriamente
-		int barcoTresPosiciones [] = {1,1,1};
-		for(int i = 0 ; i<barcoTresPosiciones.length;i++) {
-			if(posicion==0) {
-				tablero[filaBarco][columnaBarco] = barcoTresPosiciones[i];cha
-				columnaBarco++;		
-			}else {
-				tablero[filaBarco][columnaBarco] = barcoTresPosiciones[i];
-				filaBarco++;	
-			}
-		}
-		}*/
+
 	
 	public char[][] getMatrizTablero(){
 		return this.tablero;
@@ -58,6 +50,7 @@ public class Tablero {
 	
 	public void setMatrizTablero(char car, int f, int c) {
 		tablero[f][c]=car;
+		tableroUsuario[f][c] = car;
 	}
 	
 	public int getFilas() {
@@ -67,7 +60,10 @@ public class Tablero {
 		return columnasTablero;
 	}
 	
+	//Colocacion del Tablero para cuadrar filas y columnas
+	
 		public void imprimeTablero() {
+			if(this.debug) {
 			System.out.println("Dentro de imprime tablero");
 			for (int i = 0; i < numeros.length; i++) {
 				if (i + 1 == numeros.length) {
@@ -92,9 +88,9 @@ public class Tablero {
 				for (int j = 0; j < columnasTablero; j++) {
 					if(j==0) {
 						if(i<=9) {
-							System.out.print(letras[i]+"  ");
+							System.out.print(numerosVerticales[i]+"  ");
 						}else {
-							System.out.print(letras[i]+" ");
+							System.out.print(numerosVerticales[i]+" ");
 						}
 						
 						
@@ -114,19 +110,71 @@ public class Tablero {
 				System.out.println(" ");
 			}
 
+		}else {
+			imprimeTableroUsuario();
+		}
+			
+		}
+		
+		
+		
+		public void imprimeTableroUsuario() {
+			System.out.println("Dentro de imprime tablero");
+			for(int i=0;i<numeros.length;i++) {
+				if(i+1 == numeros.length) {
+					System.out.println(" | " + numeros[i] + " | ");
+				}else {
+					if (i==0) {
+						System.out.print("  | " +numeros[i] + " ");
+					}else {
+						if(i>=9) {
+							System.out.print("  | " + numeros[i] + " ");
+						}else {
+							System.out.println("| " + numeros[i] + " ");
+						}
+					}
+				}
+			}
+			System.out.println("");
+			for (int i = 0; i < filasTablero; i++) {
+				for (int j = 0; j < columnasTablero; j++) {
+					if(j==0) {
+						if(i<=9) {
+							System.out.print(numerosVerticales[i]+"  ");
+						}else {
+							System.out.print(numerosVerticales[i]+" ");
+						}
+					
 		}
 	
+					if (j + 1 == columnasTablero) {
+						System.out.print("| " + tableroUsuario[i][j] + "  | ");
+				} else {
+					if(j>=9) {
+						System.out.print("| " + tableroUsuario[i][j] + "  ");
+					}else {
+						System.out.print("| " + tableroUsuario[i][j] + " ");
+					}
+					
+				}
+			}
+			System.out.println(" ");
+		}
+
+	}
+						
+					
 	
 
 		public void colocaBarcos() {
 			//TODO: Crear tres bucles para colocar barcos
-			for(int i=0;i<=2;i++) {
+			for(int i=0;i<=Constantes.NUMERO_BARCOS_TRES_CASILLAS;i++) {
 				colocaBarco('1',3); //Barcos en forma de 1
 			}
-			for(int i=0;i<=1;i++) {
+			for(int i=0;i<=Constantes.NUMERO_BARCOS_DOS_CASILLAS;i++) {
 				colocaBarco('2',2); //Barcos en forma de 2
 			}		
-			for(int i=0;i<=2;i++) {
+			for(int i=0;i<=Constantes.NUMERO_BARCOS_UNA_CASILLA;i++) {
 				colocaBarco('3',1); //Barcos en forma de 3
 			}		
 				
