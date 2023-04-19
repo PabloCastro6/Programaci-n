@@ -38,7 +38,10 @@ public class Principal {
 			if (f.isFile()) {
 				System.out.println("Esto es un fichero y se llama: " + f.getName());
 				if (esTexto(f)) {
-					if (estaPalabra(f,palabra));
+					if (contarPalabra(f,palabra)) {
+						estaLogCreado(fechaDeHoy+ "Palabra:" + palabra +"EnCoNtRaDa!!");
+						estaLogCreado(LocalDate +"Copiando fichero" + f.getPath() +"a directorio" + Constantes.DIRECTORIO_DESTINO);
+					}
 				}
 				//comprobar si la fecha introducida es menor que la fecha del fichero y comprobar si el fichero es de texto
 				//Si se dan las dos condiciones anteriores hay que buscar si la palabra está en el fichero 
