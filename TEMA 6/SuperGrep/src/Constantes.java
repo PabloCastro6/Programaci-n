@@ -1,6 +1,6 @@
 
 public class Constantes {
 
-	public static final String DIRECTORIO_DESTINO = "C:\\resultado\\";
-	public static final String DIRETORIO_LOG = "C:\\logsSuperGrep\\";
+	public static final String DIRECTORIO_DESTINO = "ficheroscopiados/";
+	public static final String DIRETORIO_LOG = "logs/";
 }

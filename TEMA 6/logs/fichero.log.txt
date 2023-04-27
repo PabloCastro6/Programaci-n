@@ -1,0 +1,9 @@
+Fecha (formato DD/MM/AAAA HH:MM:SS) - Analizando directorio/archivo: XXXXX
+
+Fecha (formato DD/MM/AAAA HH:MM:SS) - Palabra: “XXXX”3 ENCONTRADA!!!
+
+Fecha (formato DD/MM/AAAA HH:MM:SS) - Copiando fichero: XXXX a directorio XXXX
+
+Fecha (formato DD/MM/AAAA HH:MM:SS) - Número total de archivos analizados: XX
+
+Fecha (formato DD/MM/AAAA HH:MM:SS) - Número total de directorios analizados: XX

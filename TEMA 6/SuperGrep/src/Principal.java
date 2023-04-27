@@ -32,6 +32,7 @@ public class Principal {
 
 		// 2. Recorrer este array
 		for (File f : arrayFiles) {
+		}
 			if (f.isFile()) {
 				System.out.println("Esto es un fichero y se llama: " + f.getName());
 				if (esTexto(f)) {
@@ -70,8 +71,8 @@ public class Principal {
 			return false;
 	}
 
-	public boolean contarPalabra(File f, String palabra) throws IOException {
-		try (FileReader fr = new FileReader(f, StandardCharsets.UTF_8); BufferedReader br = new BufferedReader(fr)) {
+	public static boolean contarPalabra(File f, String palabra) throws IOException {
+		try { (FileReader fr = new FileReader(f, StandardCharsets.UTF_8); BufferedReader br = new BufferedReader(fr)) {
 			String linea;
 			while ((linea = br.readLine()) != null) {
 				String[] palabrasPorLinea = linea.split("");
@@ -104,8 +105,8 @@ public class Principal {
 
 	}
 
-	public int fechaDeHoy() {
-		int año = Calendar.YEAR;
+	public  static int fechaDeHoy() {
+		int anio = Calendar.YEAR;
 		int mes = Calendar.MONTH + 1;
 		int dia = Calendar.DAY_OF_MONTH;
 		int year = año % 100;
