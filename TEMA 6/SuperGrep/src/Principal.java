@@ -3,19 +3,16 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Scanner;
 
 public class Principal {
 
-	public static void main(String[] args) {
-		start();
-	}
-
-	public static void start() {
+	public void start() throws IOException {
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Bienvenido al programa SUPERGREP");
-		
+
 		System.out.println("Por favor, introduzca la ruta del directorio que desea buscar");
 		String directorio = scanner.nextLine();
 
@@ -28,7 +25,7 @@ public class Principal {
 
 	}
 
-	public static void buscaArchivos(String directorio, String palabra, String fecha) {
+	public static void buscaArchivos(String directorio, String palabra, String fecha) throws IOException {
 
 		File raiz = new File(directorio);
 		File[] arrayFiles = raiz.listFiles();
@@ -38,14 +35,24 @@ public class Principal {
 			if (f.isFile()) {
 				System.out.println("Esto es un fichero y se llama: " + f.getName());
 				if (esTexto(f)) {
-					if (contarPalabra(f,palabra)) {
-						estaLogCreado(fechaDeHoy+ "Palabra:" + palabra +"EnCoNtRaDa!!");
-						estaLogCreado(LocalDate +"Copiando fichero" + f.getPath() +"a directorio" + Constantes.DIRECTORIO_DESTINO);
+					if (contarPalabra(f, palabra)) {
+						estaLogCreado(nombreArchivo + "Palabra:" + palabra + "EnCoNtRaDa!!");
+						estaLogCreado(LocalDate.now() + "Copiando fichero" + f.getPath() + "a directorio"
+								+ Constantes.DIRECTORIO_DESTINO);
+						if (fechaUsuario.compareTo(fechafichero) < 0) {
+							System.out.println("La fecha introducida es anterior a la fecha del fichero");
+
+						} else {
+							System.out.println("La fecha introducida es posterior a la fecha del fichero ");
+						}
 					}
 				}
-				//comprobar si la fecha introducida es menor que la fecha del fichero y comprobar si el fichero es de texto
-				//Si se dan las dos condiciones anteriores hay que buscar si la palabra está en el fichero 
-				//Si la palabra está en el fichero --> copiar el fichero al dir destino
+				// comprobar si la fecha introducida es menor que la fecha del fichero y
+				// comprobar si el fichero es de texto
+				// Si se dan las dos condiciones anteriores hay que buscar si la palabra está en
+				// el fichero
+				// Si la palabra está en el fichero --> copiar el fichero al dir destino
+				//
 			} else {
 				System.out.println("Esto es un directorio: " + f.getAbsolutePath() + "Vamos a visitarlo...");
 				buscaArchivos(f.getAbsolutePath(), palabra, fecha);
@@ -79,11 +86,11 @@ public class Principal {
 
 	}
 
-	public boolean estaLogCreado() {
+	public static boolean estaLogCreado(String mensaje) {
 		// Hacedemos a la carpeta de Log
 		// Revisar todos los archivos de la carpeta de Log
 		// Hay que crear un String con este formato superGrep_300321.log
-		String nombreArchivo = "superGrep_" + String.valueOf(fechaDeHoy()) + ".log";
+		String nombreArchivo = "superGrep_" + String.valueOf (fechaDeHoy()) + ".log";
 		File logFolder = new File("log");
 		File[] logFiles = logFolder.listFiles();
 		if (logFiles != null) {
