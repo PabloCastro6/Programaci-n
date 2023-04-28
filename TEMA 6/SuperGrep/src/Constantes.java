@@ -1,6 +1,7 @@
 
 public class Constantes {
 
-	public static final String DIRECTORIO_DESTINO = "ficheroscopiados/";
-	public static final String DIRETORIO_LOG = "logs/";
+	public static final String DIRECTORIO_DESTINO = System.getProperty("user.dir")+"\\ficherosCopiados\\";
+	public static final String DIRETORIO_LOG = System.getProperty("user.dir")+"\\logs\\";
 }
+
