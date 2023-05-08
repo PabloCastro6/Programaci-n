@@ -5,17 +5,24 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 public class Metodos {
+	int contArchivos = 0, contDirs=0,total=0;
+	FileWriter fw;
+	public Metodos (FileWriter fw) {
+		this.fw=fw;
+	}
+	
 	
 	public String escribirFecha () {
-		
-		//Devolver la fecha en formato string
-		return null;
+		SimpleDateFormat date2 = new SimpleDateFormat("dd/MM/yyyy");
+		return date2.format(new Date());
 	}
 
 	public void buscaArchivos(String directorio, String palabra, String fecha) throws IOException {
@@ -27,60 +34,51 @@ public class Metodos {
 		File[] arrayFiles = raiz.listFiles();
 		boolean palabraEncontrada = false;
 		String nombreArchivo = "";
-		// 2. Recorrer este array
+
+		
 		for (File f : arrayFiles) {
 			if (esTexto(f)) {
 				fw.write(escribirFecha()+ "Fecha-finalizando archivo: " + f.getName() + "\n");
 				nombreArchivo = f.getName();
-
+				fw.write("Fecha "+escribirFecha()+" - Analizando archivo: " + nombreArchivo + "\n");
 				if (encontrarPalabra(f, palabra)) {
 					fw.write("Palabra " + palabra + " ENCONTRADA !!! \n");
 					fw.write("Copiando fichero: " + f.getName() + " a directorio " + Constantes.DIRECTORIO_DESTINO
 							+ "\n");
-					String destino = Constantes.DIRECTORIO_DESTINO + f.getName();
-					//Covertirlo a Path 
-					Files.copy(f.toPath(), null, StandardCopyOption.REPLACE_EXISTING);
-					System.out.println("Palabra " + palabra + " ENCONTRADA !!!");
-					// Copiar fichero
-					fw.write("Copiando fichero... ");
+					
+		
+					Path origen = Paths.get(f.getAbsolutePath());
+					Path destino = Paths.get(Constantes.DIRECTORIO_DESTINO + f.getName());
+					Files.copy(origen,destino, StandardCopyOption.REPLACE_EXISTING);
+					
 
 				}
-//				System.out.println("Esto es un fichero y se llama: " + f.getName());
-//				if (esTexto(f)) {
-//						if (contarPalabra(f, palabra)) {
-//							estaLogCreado(nombreArchivo + "Palabra:" + palabra + "EnCoNtRaDa!!");
-//						estaLogCreado(LocalDate.now() + "Copiando fichero" + f.getPath() + "a directorio"
-//								+ Constantes.DIRECTORIO_DESTINO);
-//							if (fechaUsuario.compareTo(fechafichero) < 0) {
-//								System.out.println("La fecha introducida es anterior a la fecha del fichero");
-				//
-//							} else {
-//								System.out.println("La fecha introducida es posterior a la fecha del fichero ");
-//							}
-//						}
-//					}
 
-				// comprobar si la fecha introducida es menor que la fecha del fichero y
-				// comprobar si el fichero es de texto
-				// Si se dan las dos condiciones anteriores hay que buscar si la palabra está en
-				// el fichero
-				// Si la palabra está en el fichero --> copiar el fichero al dir destino
-				//
 			} else {
-				// System.out.println("Esto es un directorio: " + f.getAbsolutePath() + "Vamos a
-				// visitarlo...");
-				fw.write("Fecha - Analizando directorio: " + f.getName() + "\n");
+				fw.write("Fecha" +escribirFecha()+ "- Analizando directorio: " + f.getName() + "\n");
+				contDirs++;
 				buscaArchivos(f.getAbsolutePath(), palabra, fecha);
 
 			}
 		}
-		fw.close();
-
+	}
+	
+	public void imprimirContadores() {
+		try {
+			fw.write("Fecha" +escribirFecha()+ " - Numero total de archivos analizados: " +contArchivos+"\n");
+			
+			fw.write("Fecha " +escribirFecha()+ "- Numero total de los directorios analizados: " +contDirs+ "\n");
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public boolean esTexto(File f) {
 		String nombreDeFichero = f.getName();
 		if (nombreDeFichero.endsWith(".txt")) {
+			System.out.println("Incrementa contador Ar");
+			contArchivos++;
 			return true;
 
 		} else
@@ -109,24 +107,7 @@ public class Metodos {
 		}
 	}
 
-	public boolean estaLogCreado(String mensaje) {
-		// Hacedemos a la carpeta de Log
-		// Revisar todos los archivos de la carpeta de Log
-		// Hay que crear un String con este formato superGrep_300321.log
-		String nombreArchivo = "superGrep_" + String.valueOf(fechaDeHoy()) + ".log";
-		File logFolder = new File("log");
-		File[] logFiles = logFolder.listFiles();
-		if (logFiles != null) {
-			for (File logFile : logFiles) {
-				if (logFile.getName().equals(nombreArchivo)) {
-					return true;
-				}
-			}
-		}
-		return false;
-
-	}
-
+	
 	public int fechaDeHoy() {
 		int anio = Calendar.YEAR;
 		int mes = Calendar.MONTH + 1;
