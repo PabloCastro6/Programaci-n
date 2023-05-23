@@ -1,5 +1,7 @@
 package com.Pablo.spotify;
 
+import java.util.Objects;
+
 public class CancionDTO implements Comparable<CancionDTO>{
 	
 	private String titulo;
@@ -31,7 +33,7 @@ public class CancionDTO implements Comparable<CancionDTO>{
 	}
 	@Override
 	public int compareTo(CancionDTO o) {
-		return this.getUsuario().compareTo(o.getUsuario());
+		return this.getTitulo().compareTo(o.getTitulo());
 		
 	}
 	@Override
@@ -39,7 +41,17 @@ public class CancionDTO implements Comparable<CancionDTO>{
 		return "CancionDTO [titulo=" + titulo + ", autor=" + autor + ", usuario=" + usuario + "]";
 	}
 	
+	@Override
+	public int hashCode() {
+	return titulo.hashCode();
+	}
 	
+	
+	@Override
+	public boolean equals(Object obj) {
+		CancionDTO c = (CancionDTO) obj;
+		return c.getTitulo().equals(this.getTitulo());
 	
 
+	}
 }

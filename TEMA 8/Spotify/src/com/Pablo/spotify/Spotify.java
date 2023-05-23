@@ -6,7 +6,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Scanner;
+
+import com.Pablo.comparator.ComparaArtista;
+import com.Pablo.comparator.ComparaPorUsuario;
 
 public class Spotify {
 	
@@ -16,16 +21,42 @@ public class Spotify {
 		// Leer canciones
 		getSongs();
 		
-		for (CancionDTO s : listaCanciones) {
+		HashSet <CancionDTO> hs = new HashSet<CancionDTO> (listaCanciones);
+		System.out.println("=========Contenido de hashset======");
+		for (CancionDTO s : listaCanciones) 
 			System.out.println(s);
-		}
-		Collections.sort(listaCanciones);
-	//	Collections.sort(listaCanciones);
-		System.out.println("=============");
 		
+			Scanner sc = new Scanner (System.in);
+		
+System.out.println("======ANTES DE ORDENAR=======");
+		
+
+
+
 		for (CancionDTO s : listaCanciones) {
 			System.out.println(s);
 	}
+		Scanner sc = new Scanner (System.in);
+		System.out.println("Como deseas ordenar las canciones? (artista/usuario/cancion)");
+		String respuesta = sc.nextLine();
+		
+		
+		if(respuesta.equals("artista")) {
+			Collections.sort(listaCanciones,new ComparaArtista());
+			
+		} else if (respuesta.equals("usuario")) {
+			Collections.sort(listaCanciones,new ComparaPorUsuario());
+		} else {
+			Collections.sort(listaCanciones);
+		}
+		
+		System.out.println("======DESPUES DE ORDENAR=======");
+		
+		for (CancionDTO s : listaCanciones) {
+			System.out.println(s);
+		}
+
+		
 	}
 	
 	
