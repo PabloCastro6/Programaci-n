@@ -76,19 +76,33 @@ public class VistaClientes {
 		String country = 	sc.nextLine();
 		
 		System.out.println("Digame el salesRepEmployeeNumber ");
-		Integer salesRedEmployeeNumber = 	sc.nextInt();
-		sc.nextLine();
+		Integer salesRepEmployeeNumber = 0;
+		try  {
+			salesRepEmployeeNumber = Integer.parseInt(sc.nextLine());
+			
+		} catch (NumberFormatException e) {
+			System.out.println("No has introducido nada, no se cambiara el representado");
+		}
+	
+		
+	
 		System.out.println("Digame el creditLimit (pon decimales) ");
-		Double creditLimit = 	sc.nextDouble();
-		sc.nextLine();
+		Double creditLimit = 0.0;
+		try {
+			creditLimit = Double.parseDouble(sc.nextLine());
+			
+		} catch (NumberFormatException e) {
+			System.out.println("NO has introducido nada, no se cambiara el creedito");
+		}
 		
 		
 		ClientesController cc = new ClientesController();
-		
-		Integer insertarCliente = cc.insertarCliente(customerName, customerNumber, contactLastName, phone, addresLine1, addresLine2, city, state, postalCode, country, salesRedEmployeeNumber, creditLimit);
+		cc.actualizarCliente(customerName, customerNumber, contactLastName, phone, addresLine1, addresLine2, city, state, postalCode, country, salesRepEmployeeNumber, creditLimit);
 			
 		}
 		
+	
+	
 	}
 	
 	

@@ -22,4 +22,13 @@ public class ClientesController {
 	ClientesModelo cm = new ClientesModelo();
 	return cm.insertarCCliente(customerName, customerNumber, contactLastName, phone, addresLine1, addresLine2, city, state, postalCode, country, salesRepEmployeeNumber, creditLimit);
 } 
+	 
+	 public Integer actualizarCliente (Integer customerName,String customerNumber,String contactLastName,String phone,String addresLine1, String addresLine2, 
+				String city, String state, String postalCode,
+				String country, Integer salesRepEmployeeNumber, Double creditLimit) {
+					return cm.actualizarCliente( customerName, customerNumber, contactLastName, phone, addresLine1,  addresLine2, 
+							 city,  state, postalCode,
+							 country,  salesRepEmployeeNumber,  creditLimit);
+}
+
 }
