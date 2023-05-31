@@ -13,7 +13,6 @@ import com.Pablo.classicmodels.utils.DBUtils;
 
 public class ClientesModelo {
 	
-	private Int customerName;
 
 	public  List<ClienteDTO> recuperaTodosClientes() throws ClassNotFoundException, SQLException {
 		Connection conexionBBDD = DBUtils.conexionBBDD();
@@ -99,7 +98,7 @@ public class ClientesModelo {
 		return resultado;
 	}
 
-	public Integer actualizarCliente (Integer customerName,String customerNumber,String contactLastName,String phone,String addresLine1, String addresLine2, 
+	public Integer actualizarCliente (String customerName,String customerNumber,String contactLastName,String phone,String addresLine1, String addresLine2, 
 			String city, String state, String postalCode,
 			String country, Integer salesRepEmployeeNumber, Double creditLimit) {
 		
@@ -165,6 +164,21 @@ public class ClientesModelo {
 		
 		
 		
+	}
+	
+	public Integer borrarCliente (int customerNumber) {
+		String sql = "DELETE FROM customers WHERE customerNumber = ?" ;
+		
+		Connection con = DBUtils.conexionBBDD();
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setInt(1, customerNumber);
+		
+		int resultado = ps.executeUpdate();
+		
+		con.close();
+		return null;
 	}
 	
 }

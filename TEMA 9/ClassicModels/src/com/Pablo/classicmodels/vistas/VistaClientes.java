@@ -101,7 +101,22 @@ public class VistaClientes {
 			
 		}
 		
-	
+	public void menuBorrarCliente() {
+		sc = MiScanner.getInstance();
+		System.out.println("digame el customerNumber");
+		
+		Integer customerNumber = sc.nextInt();
+		sc.nextLine();
+		
+		ClientesController cc = new ClientesController();
+		
+		int resultado = cc.borrarCliente(customerNumber);
+		
+		if(resultado == 1 ) {
+			System.out.println("cliente borrado con exito");
+		}
+		
+	}
 	
 	}
 	
