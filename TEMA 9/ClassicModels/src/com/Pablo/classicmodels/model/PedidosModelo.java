@@ -61,5 +61,11 @@ public class PedidosModelo {
 		return orderNumber;
 	}
 
+	public List<EmpleadosDTO> consultarEmpleados(Integer employeeNumber, String lastName, String firstName,
+			String extension, String jobTitle) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 }

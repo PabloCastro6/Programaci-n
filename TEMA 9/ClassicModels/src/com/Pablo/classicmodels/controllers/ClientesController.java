@@ -6,6 +6,8 @@ import java.util.List;
 import com.Pablo.classicmodels.dtos.ClienteDTO;
 import com.Pablo.classicmodels.model.ClientesModelo;
 
+
+
 public class ClientesController {
 	
 	 public List<ClienteDTO> recuperarClienteFiltraPorNombre(String nombre) throws ClassNotFoundException, SQLException {
@@ -20,21 +22,21 @@ public class ClientesController {
 			return cm.recuperarClienteFiltraPorNombreTelefono(nombre, telefono, pais);
 		}
 	 
-	 public Integer insertarCliente(Integer customerName,String customerNumber,String contactLastName,String phone,String addresLine1, String addresLine2, 
-				String city, String state, String postalCode,
-				String country, Integer salesRepEmployeeNumber, Double creditLimit  ) throws ClassNotFoundException, SQLException {
+	 public Integer insertarCliente(Integer customerNumber, String customerName, String contactLastName,
+	            String contactFirstName, String phone, String addressLine1, String addressLine2, String city, String state,
+	            String postalCode, String country, Integer salesRepEmployeeNumber, Double creditLimit)  throws ClassNotFoundException, SQLException {
 		
 	ClientesModelo cm = new ClientesModelo();
-	return cm.actualizarCliente(customerName, customerNumber, contactLastName, phone, addresLine1, addresLine2, city, state, postalCode, country, salesRepEmployeeNumber, creditLimit);
+	return cm.insertarCliente(customerNumber, customerName, contactLastName, contactFirstName, phone, addressLine1, addressLine2, city, state, postalCode, country, salesRepEmployeeNumber, creditLimit);
+
 } 
 	 
-	 public Integer actualizarCliente (String customerName,String customerNumber,String contactLastName,String phone,String addresLine1, String addresLine2, 
+	 public Integer actualizarCliente (String customerNumber,int customerName,String contactLastName,String contactFirstName, String phone,String addressLine1, String addressLine2, 
 				String city, String state, String postalCode,
 				String country, Integer salesRepEmployeeNumber, Double creditLimit) throws ClassNotFoundException, SQLException {
 		ClientesModelo cm = new ClientesModelo();			
-		 return cm.actualizarCliente( customerName, customerNumber, contactLastName, phone, addresLine1,  addresLine2, 
-							 city,  state, postalCode,
-							 country,  salesRepEmployeeNumber,  creditLimit);
+		return cm.actualizarClientes(  customerName,   customerNumber,   contactLastName,   contactFirstName,   phone,   addressLine1,   addressLine2,   city,   state,  postalCode,  country,  salesRepEmployeeNumber,  creditLimit);
+
 }
 
 	 public Integer borrarCliente(int customerNumber) throws ClassNotFoundException, SQLException {

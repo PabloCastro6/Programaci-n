@@ -64,24 +64,26 @@ public List<ClienteDTO> recuperarClienteFiltraPorNombre (String nombre) throws C
 	
 	public Integer insertarCliente(Integer  customerNumber, String  customerName, String  contactLastName, String  contactFirstName, String  phone, String  addressLine1, String  addressLine2, String  city, String  state, String postalCode, String country, Integer salesRepEmployeeNumber, Double creditLimit) throws SQLException, ClassNotFoundException {
 		
-		String sql ="INSERT INTO customers (customerNumber, customerName, contactLastName, contactFirstName, phone, addressLine1, addressLine2, city, state, postalCode, country, salesRepEmployeeNumber, creditLimit) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
-		
+		String sql = "INSERT INTO customers (customerNumber, customerName, contactLastName, contactFirstName, phone, addressLine1, addressLine2, city, state, postalCode, country, salesRepEmployeeNumber, creditLimit) "
+                + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
 		Connection conexionBBDD = DBUtils.conexionBBDD();
 		PreparedStatement ps = conexionBBDD.prepareStatement(sql);
 		
-		ps.setInt(1, customerNumber);
-		ps.setString(2, customerName);
-		ps.setString(3, contactLastName);
-		ps.setString(4, contactFirstName);
-		ps.setString(5, phone);
-		ps.setString(6, addressLine1);
-		ps.setString(7, addressLine2);
-		ps.setString(8, city);
-		ps.setString(9, state);
-		ps.setString(10, postalCode);
-		ps.setString(11, country);
-		ps.setInt(12, salesRepEmployeeNumber);
-		ps.setDouble(13, creditLimit);
+        ps.setInt(1, customerNumber);
+        ps.setString(2, customerName);
+        ps.setString(3, contactLastName);
+        ps.setString(4, contactFirstName);
+        ps.setString(5, phone);
+        ps.setString(6, addressLine1);
+        ps.setString(7, addressLine2);
+        ps.setString(8, city);
+        ps.setString(9, state);
+        ps.setString(10, postalCode);
+        ps.setString(11, country);
+        ps.setInt(12, salesRepEmployeeNumber);
+        ps.setDouble(13, creditLimit);
+		
 		
 		Integer resultado = ps.executeUpdate();
 		conexionBBDD.close();
@@ -109,43 +111,46 @@ public List<ClienteDTO> recuperarClienteFiltraPorNombre (String nombre) throws C
 		Connection conexionBBDD = DBUtils.conexionBBDD();
 		PreparedStatement ps = conexionBBDD.prepareStatement(query);
 		
-		ps.setString(1, customerName);
-		ps.setString(2, customerName);
+		ps.setInt(1, customerNumber);
+		ps.setInt(2, customerNumber);
 		
-		ps.setString(3, contactLastName);
-		ps.setString(4, contactLastName);
+		ps.setString(3, customerName);
+		ps.setString(4, customerName);
 		
-		ps.setString(5, contactFirstName);
-		ps.setString(6, contactFirstName);
+		ps.setString(5, contactLastName);
+		ps.setString(6, contactLastName);
 		
-		ps.setString(7, phone);
-		ps.setString(8, phone);
+		ps.setString(7, contactFirstName);
+		ps.setString(8, contactFirstName);
 		
-		ps.setString(9, addressLine1);
-		ps.setString(10, addressLine1);
+		ps.setString(9, phone);
+		ps.setString(10, phone);
 		
-		ps.setString(11, addressLine2);
-		ps.setString(12, addressLine2);
+		ps.setString(11, addressLine1);
+		ps.setString(12, addressLine1);
 		
-		ps.setString(13, city);
-		ps.setString(14, city);
+		ps.setString(13, addressLine2);
+		ps.setString(14, addressLine2);
 		
-		ps.setString(15, state);
-		ps.setString(16, state);
+		ps.setString(15, city);
+		ps.setString(16, city);
 		
-		ps.setString(17, postalCode);
-		ps.setString(18, postalCode);
+		ps.setString(17, state);
+		ps.setString(18, state);
 		
-		ps.setString(19, country);
-		ps.setString(20, country);
+		ps.setString(19, postalCode);
+		ps.setString(20, postalCode);
 		
-		ps.setInt(21, salesRepEmployeeNumber);
-		ps.setInt(22, salesRepEmployeeNumber);
+		ps.setString(21, country);
+		ps.setString(22, country);
 		
-		ps.setDouble(23, creditLimit);
-		ps.setDouble(24, creditLimit);
+		ps.setInt(23, salesRepEmployeeNumber);
+		ps.setInt(24, salesRepEmployeeNumber);
+		
+		ps.setDouble(25, creditLimit);
+		ps.setDouble(26, creditLimit);
 
-		ps.setInt(25, customerNumber);
+		ps.setInt(27, customerNumber);
 		
 		Integer resultado = ps.executeUpdate();
 		conexionBBDD.close();
@@ -167,4 +172,6 @@ public List<ClienteDTO> recuperarClienteFiltraPorNombre (String nombre) throws C
 		
 		return resultado;
 	}
-}
+
+	}
+

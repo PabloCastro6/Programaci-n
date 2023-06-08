@@ -18,7 +18,7 @@ Scanner sc;
 		String nombre = sc.nextLine();
 		
 		ClientesController cc = new ClientesController();
-		List<ClienteDTO> listaCliente = cc.recuperarClienteFiltraPorNombre(nombre, nombre, nombre);
+		List<ClienteDTO> listaCliente = cc.recuperarClienteFiltraPorNombre(nombre);
 		
 		for(ClienteDTO c : listaCliente) {
 			System.out.println(c.toString());
@@ -39,7 +39,7 @@ Scanner sc;
 		String phone = sc.nextLine();
 		
 		ClientesController cc = new ClientesController();
-		List<ClienteDTO> listaCliente = cc.recuperarClienteFiltraPorNombre(nombre, country, phone);
+		List<ClienteDTO> listaCliente = cc.recuperarClienteFiltraPorNombre(nombre);
 		
 		for(ClienteDTO c : listaCliente) {
 			System.out.println(c.toString());
@@ -94,7 +94,9 @@ Scanner sc;
 		
 		
 		ClientesController cc = new ClientesController();
-		Integer insertarCliente = cc.insertarCliente(customerNumber, customerName, contactLastName, contactFirstName, phone, addressLine1, addressLine2, city, state, postalCode, salesRepEmployeeNumber, creditLimit);
+		Integer insertarCliente = cc.insertarCliente(customerNumber, customerName,  contactLastName,
+	             contactFirstName,  phone,  addressLine1,  addressLine2,  city,  state,
+	             postalCode,  country,  salesRepEmployeeNumber,  creditLimit);
 	}
 	
 	public void menuActualizarClientes() throws SQLException, ClassNotFoundException {
@@ -155,7 +157,7 @@ Scanner sc;
 		
 		
 		ClientesController cc = new ClientesController();
-		Integer insertarCliente = cc.actualizarClientes(customerNumber, customerName, contactLastName, contactFirstName, phone, addressLine1, addressLine2, city, state, postalCode, country, salesRepEmployeeNumber, creditLimit);
+		Integer insertarCliente = cc.actualizarCliente( customerName,   customerNumber,   contactLastName,   contactFirstName,   phone,   addressLine1,   addressLine2,   city,   state,  postalCode,  country,  salesRepEmployeeNumber,  creditLimit);
 	}
 	
 	public void menuBorrarCliente() throws SQLException, ClassNotFoundException {

@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.Pablo.classicmodels.dtos.LineaProductosDTO;
+import com.Pablo.classicmodels.dtos.OficinaDTO;
 import com.Pablo.classicmodels.model.LineaProductosModelo;
 
 public class OficinaController {
@@ -34,5 +35,36 @@ public List<LineaProductosDTO> consultarLineaProductos(String productLine, Strin
 		
 		return lpm.borrarLineaProductos(productLine);
 		}
-}
+
+	public List<OficinaDTO> recuperarOficina(String officeCode, String city, String state, String country) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Integer insertarOficina(String officeCode, String city, String phone, String addressLine1,
+			String addressLine2, String state, String country, String postalCode, String territory) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Integer actualizarOficina(String officeCode, String city, String phone, String addressLine1,
+			String addressLine2, String state, String country, String postalCode, String territory) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Integer borrarOficina(String officeCode) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	}
+
+	
+	
+
+	
+	
+
 
