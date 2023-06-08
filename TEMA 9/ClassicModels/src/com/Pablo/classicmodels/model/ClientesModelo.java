@@ -14,112 +14,100 @@ import com.Pablo.classicmodels.utils.DBUtils;
 public class ClientesModelo {
 	
 
-	public  List<ClienteDTO> recuperaTodosClientes() throws ClassNotFoundException, SQLException {
-		Connection conexionBBDD = DBUtils.conexionBBDD();
+public List<ClienteDTO> recuperarClienteFiltraPorNombre (String nombre) throws ClassNotFoundException, SQLException{
 		
-		
-		Statement statement = conexionBBDD.createStatement();
-		
-		ResultSet rs = statement.executeQuery("SELECT * FROM customers");
-		
-		List<ClienteDTO> listaClientes = new ArrayList<>();
-		
-		while (rs.next()) {
-			ClienteDTO c = new ClienteDTO(rs.getString("customerName"), rs.getString("phone"));
-            listaClientes.add(c);
-		}
-		conexionBBDD.close();
-		return listaClientes;
-	}
-	
-	public List<ClienteDTO> recuperaClienteFiltraPorNombre(String nombre, String country, String phone) throws ClassNotFoundException, SQLException {
-		
-		String query = "SELECT * FROM customers WHERE customerName LIKE ? AND country LIKE ? AND phone LIKE ?";
+		String query = "SELECT * FROM customers WHERE customerName LIKE ? ";
 		
 		Connection conexionBBDD = DBUtils.conexionBBDD();
 		PreparedStatement ps = conexionBBDD.prepareStatement(query);
 		
+		ps.setString(1,"%" + nombre + "%");
 		
-		ps.setString(1, "%" + nombre + "%");
-		ps.setString(2, "%" + country + "%");
-		ps.setString(3, "%" + phone + "%");
 		
-		System.out.println("query que enviamos: " + ps.toString());
 		ResultSet rs = ps.executeQuery();
 		
-		List <ClienteDTO> listaClientes = new ArrayList<>();
+		List<ClienteDTO> listaCliente = new ArrayList<>();
 		
 		while (rs.next()) {
-			//ClienteDTO c = new ClienteDTO(rs.getArray("customerName"),rs.getString("Phone"));
-        listaClientes.add(new ClienteDTO(rs.getString("customerName"), rs.getString("phone")));		
+			ClienteDTO c = new ClienteDTO(rs.getInt("customerNumber"), rs.getString("customerName"), rs.getString("contactLastName"),rs.getString("contactFirstName"), rs.getString("phone"), rs.getString("addressLine1"),rs.getString("addressLine2"), rs.getString("city"), rs.getString("state"),rs.getString("postalCode"), rs.getString("country"), rs.getInt("salesRepEmployeeNumber"),rs.getDouble("creditLimit"));
+			listaCliente.add(c);
 		}
+		
 		conexionBBDD.close();
-		return listaClientes;
-		
-		
-		
-	
+		return listaCliente;
 	}
 	
-	public Integer insertarCCliente(Integer customerName,String customerNumber,String contactLastName,String phone,String addresLine1, String addresLine2, 
-			String city, String state, String postalCode,
-	
-			String country, Integer salesRepEmployeeNumber, Double creditLimit  ) throws ClassNotFoundException, SQLException {
-	
+	public List<ClienteDTO> recuperarClienteFiltraPorNombreTelefono (String nombre, String country, String phone) throws ClassNotFoundException, SQLException{
 		
-		String sql ="INSERT INTO customers (customerNumber,customerName,contactLastName, contactFirstName, phone, addresLine1, addresLine2,"
-				+ " city, state, postalCode,"
-				+ "country,salesRepEmployeeNumber,creditLimit" + "VALUES (?, ?,?,?,?,?,?,?,?,?,?,?)";
-		
+		String query = "SELECT * FROM customers WHERE customerName LIKE ? AND country LIKE ? AND phone LIKE ? ";
 		
 		Connection conexionBBDD = DBUtils.conexionBBDD();
+		PreparedStatement ps = conexionBBDD.prepareStatement(query);
 		
+		ps.setString(1,"%" + nombre + "%");
+		ps.setString(2,"%" + country + "%");
+		ps.setString(3,"%" + phone + "%");
+		
+
+		ResultSet rs = ps.executeQuery();
+		
+		List<ClienteDTO> listaCliente = new ArrayList<>();
+		
+		while (rs.next()) {
+			ClienteDTO c = new ClienteDTO(rs.getInt("customerNumber"), rs.getString("customerName"), rs.getString("contactLastName"),rs.getString("contactFirstName"), rs.getString("phone"), rs.getString("addressLine1"),rs.getString("addressLine2"), rs.getString("city"), rs.getString("state"),rs.getString("postalCode"), rs.getString("country"), rs.getInt("salesRepEmployeeNumber"),rs.getDouble("creditLimit"));
+			listaCliente.add(c);
+		}
+		
+		conexionBBDD.close();
+		return listaCliente;
+	}
+	
+	public Integer insertarCliente(Integer  customerNumber, String  customerName, String  contactLastName, String  contactFirstName, String  phone, String  addressLine1, String  addressLine2, String  city, String  state, String postalCode, String country, Integer salesRepEmployeeNumber, Double creditLimit) throws SQLException, ClassNotFoundException {
+		
+		String sql ="INSERT INTO customers (customerNumber, customerName, contactLastName, contactFirstName, phone, addressLine1, addressLine2, city, state, postalCode, country, salesRepEmployeeNumber, creditLimit) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
+		
+		Connection conexionBBDD = DBUtils.conexionBBDD();
 		PreparedStatement ps = conexionBBDD.prepareStatement(sql);
 		
-		ps.setInt(1, customerName);
-		ps.setString(2, customerNumber);
+		ps.setInt(1, customerNumber);
+		ps.setString(2, customerName);
 		ps.setString(3, contactLastName);
-		ps.setString(4, phone);
-		ps.setString(5, addresLine1);
-		ps.setString(6, addresLine2);
-		ps.setString(7, city);
-		ps.setString(8, state);
-		ps.setString(9, postalCode);
-		ps.setString(10, country);
-		ps.setInt(11, salesRepEmployeeNumber);
-		ps.setDouble(12, creditLimit);
+		ps.setString(4, contactFirstName);
+		ps.setString(5, phone);
+		ps.setString(6, addressLine1);
+		ps.setString(7, addressLine2);
+		ps.setString(8, city);
+		ps.setString(9, state);
+		ps.setString(10, postalCode);
+		ps.setString(11, country);
+		ps.setInt(12, salesRepEmployeeNumber);
+		ps.setDouble(13, creditLimit);
 		
 		Integer resultado = ps.executeUpdate();
-		
-		
-		
 		conexionBBDD.close();
 		
 		return resultado;
 	}
-
-	public Integer actualizarCliente (String customerName,String customerNumber,String contactLastName,String phone,String addresLine1, String addresLine2, 
-			String city, String state, String postalCode,
-			String country, Integer salesRepEmployeeNumber, Double creditLimit) {
+	
+	public Integer actualizarClientes(Integer  customerNumber, String  customerName, String  contactLastName, String  contactFirstName, String  phone, String  addressLine1, String  addressLine2, String  city, String  state, String postalCode, String country, Integer salesRepEmployeeNumber, Double creditLimit) throws SQLException, ClassNotFoundException {
 		
+		String query ="UPDATE customers SET customerName = case when ? ='' then customerName else ? END, "
+				+ "contactLastName = case when ? ='' then contactLastName else ? END, "
+				+ "contactFirstName = case when ? ='' then contactFirstName else ? END, "
+				+ "phone = case when ? ='' then phone else ? END, "
+				+ "addressLine1 = case when ? ='' then addressLine1 else ? END, "
+				+ "addressLine2 = case when ? ='' then addressLine2 else ? END, "
+				+ "city = case when ? ='' then city else ? END, "
+				+ "state = case when ? ='' then state else ? END, "
+				+ "postalCode = case when ? ='' then postalCode else ? END, "
+				+ "country = case when ? ='' then country else ? END, "
+				+ "salesRepEmployeeNumber = case when ? ='' then salesRepEmployeeNumber else ? END, "
+				+ "creditLimit = case when ? ='' then creditLimit else ? "
+				+ "END "
+				+ "WHERE customerNumber = ? ";
 		
-		String query = " UPDATE customers SET customerName = CASE WHEN ? = ''  THEN customerName ELSE ? END, "
-				+"contactLastName = CASE WHEN ? = '' then contactLastName ELSE ? END, "
-				+"contactFirstName = CASE WHEN ? = '' then contactFirstName ELSE ? END, "
-				+"phone = CASE WHEN ? = '' THEN phone ELSE ? END, "
-				+ "adressLine1 = CASE WHEN ? = '' then adressLine1 ELSE ? END, "
-				+"adressLine2 = CASE WHEN ? = '' then adressLine2 ELSE ? END, " 
-				+"city = CASE WHEN ? = '' THEN city ELSE ? END, "
-				+ "state = CASE WHEN ? = '' THEN state ELSE ? END, "
-				+ "postalCode = CASE WHEN ? = '' THEN postalCode ELSE ? END,  "
-				+ "country = CASE WHEN ? = '' THEN country ELSE ?  END, "
-				+ "salesRepEmploteeNumber = CASE WHEN ? = '' THEN salesRepEmploteeNumber ELSE ? END,  "
-				+ "creditLimit = CASE WHEN ? = '' THEN creditLimit ELSE ?  END, "
-				+ "END"
-				+ "WHERE customerNumber = ?";
-		
-		Connection conexionBDD = DBUtils.conexionBBDD();
-		PreparedStatement ps = conexionBDD.prepareStatement(query);
+		Connection conexionBBDD = DBUtils.conexionBBDD();
+		PreparedStatement ps = conexionBBDD.prepareStatement(query);
 		
 		ps.setString(1, customerName);
 		ps.setString(2, customerName);
@@ -127,58 +115,56 @@ public class ClientesModelo {
 		ps.setString(3, contactLastName);
 		ps.setString(4, contactLastName);
 		
-		ps.setString(5, phone);
-		ps.setString(6, phone);	
+		ps.setString(5, contactFirstName);
+		ps.setString(6, contactFirstName);
 		
-		ps.setString(7, addresLine1);
-		ps.setString(8, addresLine1);	
+		ps.setString(7, phone);
+		ps.setString(8, phone);
 		
-		ps.setString(9, addresLine2);
-		ps.setString(10, addresLine2);	
+		ps.setString(9, addressLine1);
+		ps.setString(10, addressLine1);
 		
-		ps.setString(11, city);
-		ps.setString(14, city);	
+		ps.setString(11, addressLine2);
+		ps.setString(12, addressLine2);
 		
-		ps.setString(12, state);
-		ps.setString(13, state);
+		ps.setString(13, city);
+		ps.setString(14, city);
 		
-		ps.setString(14, postalCode);
-		ps.setString(15, postalCode);
+		ps.setString(15, state);
+		ps.setString(16, state);
 		
-		ps.setString(16, country);
-		ps.setString(17, country);
+		ps.setString(17, postalCode);
+		ps.setString(18, postalCode);
 		
-		ps.setInt(18, salesRepEmployeeNumber);
-		ps.setInt(19, salesRepEmployeeNumber);
+		ps.setString(19, country);
+		ps.setString(20, country);
 		
-		ps.setDouble(20,creditLimit);
-		ps.setDouble(21,creditLimit);
+		ps.setInt(21, salesRepEmployeeNumber);
+		ps.setInt(22, salesRepEmployeeNumber);
 		
-		ps.setString(22, customerNumber);
-		
-		System.out.println(ps.toString());
+		ps.setDouble(23, creditLimit);
+		ps.setDouble(24, creditLimit);
+
+		ps.setInt(25, customerNumber);
 		
 		Integer resultado = ps.executeUpdate();
+		conexionBBDD.close();
+		
+		
 		return resultado;
-		
-		
-		
-		
 	}
 	
-	public Integer borrarCliente (int customerNumber) {
-		String sql = "DELETE FROM customers WHERE customerNumber = ?" ;
+	public Integer borrarCliente(int customerNumber) throws SQLException, ClassNotFoundException {
+		String sql = "DELETE FROM customers WHERE customerNumber = ?";
 		
-		Connection con = DBUtils.conexionBBDD();
-		
-		PreparedStatement ps = con.prepareStatement(sql);
+		Connection conexionBBDD = DBUtils.conexionBBDD();
+		PreparedStatement ps = conexionBBDD.prepareStatement(sql);
 		
 		ps.setInt(1, customerNumber);
 		
-		int resultado = ps.executeUpdate();
+		Integer resultado = ps.executeUpdate();
+		conexionBBDD.close();
 		
-		con.close();
-		return null;
+		return resultado;
 	}
-	
 }

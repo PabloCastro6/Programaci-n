@@ -7,78 +7,59 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-import com.Pablo.classicmodels.dtos.CantidadPedidaProducto;
+import com.Pablo.classicmodels.dtos.CantidadPedidaProductoDTO;
+import com.Pablo.classicmodels.dtos.EmpleadosDTO;
 import com.Pablo.classicmodels.utils.DBUtils;
 
 public class PedidosModelo {
 
-	public Integer crearPedido ( String orderDate, String requiredDate,String status,String comments,
-			Integer customerNumber, List<CantidadPedidaProducto> listaProductos) throws ClassNotFoundException, SQLException {
+	public Integer crearPedido(String orderDate, String requiredDate, String status,String comments, Integer customerNumber, List<CantidadPedidaProductoDTO> listaProductos) throws ClassNotFoundException, SQLException {
 		
-		//Insert del order
-		String insertOrder = "INSERT INTO orders (orderDate, requiredDate,status,comments,customerNumber)" 
-				+ "VALUES (?, ?, ?, ?,?)";
-		//Insert del order details (un insert por producto)
-		String insertOrderDetails = "INSERT INTO orderdetails (orderNumber,productCode,quantityOrdered,orderLineNumber)" 
-		+ "VALUES (?,?,?,?) ";
+		String queryOrder = "INSERT INTO orders (orderDate, requiredDate, status, comments, customerNumber) values (?, ?, ?, ?, ?)";
+		String queryOrderDetails = "INSERT INTO orderDetails (orderNumber, productCode, quantityOrdered, orderLineNumber) values (?, ?, ?, ?)";
+		String queryUpdateProducts = "UPDATE products SET quatityInStock = quatityInStock - ? WHERE productCode = ?";
 		
-		//Actulizacion del inventario
-		String actualizacionInventario = "UPDATE products SET quantityInStock = quantityInStock  - ? "
-				                        + "WHERE productCode = ?";
+		Connection conexionBBDD = DBUtils.conexionBBDD();
+		conexionBBDD.setAutoCommit(false);
+		PreparedStatement psOrder = conexionBBDD.prepareStatement(queryOrder, Statement.RETURN_GENERATED_KEYS);
+		PreparedStatement psOrderDetails = conexionBBDD.prepareStatement(queryOrderDetails);
+		PreparedStatement psUpdateProducts = conexionBBDD.prepareStatement(queryUpdateProducts);
 		
-		Connection connection = DBUtils.conexionBBDD();
+		psOrder.setString(1, orderDate);
+		psOrder.setString(2, requiredDate);
+		psOrder.setString(3, status);
+		psOrder.setString(4, comments);
+		psOrder.setInt(5, customerNumber);
+		psOrder.executeUpdate();
 		
-		connection.setAutoCommit(false);
-		
-		PreparedStatement psInsertOrder = connection.prepareStatement(insertOrder,Statement.RETURN_GENERATED_KEYS);
-		PreparedStatement psInsertOrderDetails = connection.prepareStatement(insertOrderDetails);
-		PreparedStatement psActualizacionInventario = connection.prepareStatement(actualizacionInventario);
-		
-		psInsertOrder.setString(1, orderDate);
-		psInsertOrder.setString(2, requiredDate);
-		psInsertOrder.setString(3, status);
-		psInsertOrder.setString(4, comments);
-		psInsertOrder.setInt(5, customerNumber);
-		
-		
-		System.out.println(psInsertOrder.toString());
-		
-		psInsertOrder.executeUpdate();
-		
-		
-		ResultSet rs = psInsertOrder.getGeneratedKeys();
+		ResultSet rs = psOrder.getGeneratedKeys();
 		int orderNumber = 0;
+		int orderLineNumber = 0;
+		
 		if (rs.next()) {
 			orderNumber = rs.getInt(1);
 		}
 		
-		int orderLineNumber = 0;
-		
-		for (CantidadPedidaProducto producto : listaProductos) {
+		for(CantidadPedidaProductoDTO producto : listaProductos) {
+			
 			orderLineNumber++;
-			psInsertOrderDetails.setInt(1, orderNumber);
-			psInsertOrderDetails.setString(2, producto.getProductCode());
-			psInsertOrderDetails.setInt(3,producto.getQuantityOrdered());
-			psInsertOrderDetails.setInt(4,orderLineNumber);
+			psOrderDetails.setInt(1, orderNumber);
+			psOrderDetails.setString(2, producto.getProductCode());
+			psOrderDetails.setInt(3, producto.getQuantityOrdered());
+			psOrderDetails.setInt(4, orderLineNumber);
 			
-			psActualizacionInventario.setInt(1,producto.getQuantityOrdered());
-			psActualizacionInventario.setString(2,producto.getProductCode());
+			psUpdateProducts.setInt(1, producto.getQuantityOrdered());
+			psUpdateProducts.setString(2, producto.getProductCode());
 			
-			
-			System.out.println(psInsertOrderDetails.toString());
-			System.out.println(psActualizacionInventario.toString());
-			
-			
-			psInsertOrderDetails.executeUpdate();
-			psActualizacionInventario.executeUpdate();
+			psOrderDetails.executeUpdate();
+			psUpdateProducts.executeUpdate();
 		}
 		
-		connection.commit();
-		
-		
-		connection.close();
+		conexionBBDD.setAutoCommit(true);
+		conexionBBDD.close();
 		
 		return orderNumber;
+	}
+
 	
-}
 }

@@ -20,19 +20,19 @@ public class ClientesController {
 				String country, Integer salesRepEmployeeNumber, Double creditLimit  ) throws ClassNotFoundException, SQLException {
 		
 	ClientesModelo cm = new ClientesModelo();
-	return cm.insertarCCliente(customerName, customerNumber, contactLastName, phone, addresLine1, addresLine2, city, state, postalCode, country, salesRepEmployeeNumber, creditLimit);
+	return cm.insertarCliente(customerName, customerNumber, contactLastName, phone, addresLine1, addresLine2, city, state, postalCode, country, salesRepEmployeeNumber, creditLimit);
 } 
 	 
 	 public Integer actualizarCliente (String customerName,String customerNumber,String contactLastName,String phone,String addresLine1, String addresLine2, 
 				String city, String state, String postalCode,
-				String country, Integer salesRepEmployeeNumber, Double creditLimit) {
+				String country, Integer salesRepEmployeeNumber, Double creditLimit) throws ClassNotFoundException, SQLException {
 		ClientesModelo cm = new ClientesModelo();			
 		 return cm.actualizarCliente( customerName, customerNumber, contactLastName, phone, addresLine1,  addresLine2, 
 							 city,  state, postalCode,
 							 country,  salesRepEmployeeNumber,  creditLimit);
 }
 
-	 public Integer borrarCliente(int customerNumber) {
+	 public Integer borrarCliente(int customerNumber) throws ClassNotFoundException, SQLException {
 		 ClientesModelo cm = new ClientesModelo();
 		 return cm.borrarCliente(customerNumber);
 	 }
