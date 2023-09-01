@@ -13,7 +13,7 @@ public class ClientesModelo {
     public static boolean crear(BancoDTO cliente) throws SQLException {
         try {
             Connection connection = BaseDeDatos.conectar();
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO clientes (nombre, apellido, direccion, telefono) VALUES (?, ?, ?, ?)");
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO alumnos (nombre, apellido, direccion, telefono) VALUES (?, ?, ?, ?)");
             statement.setString(1, cliente.getNombre());
             statement.setString(2, cliente.getApellido());
             statement.setString(3, cliente.getDireccion());
